@@ -1,61 +1,223 @@
-# Test Plan
+# Manual Test Plan – Guest Checkout Flow
 
-## Objective
+## Goal
 
-Verify that a guest user can successfully complete the checkout process using the Cash on Delivery payment method.
-
----
-
-## Scope
-
-The following functionality is covered:
-
-* Homepage access
-* Product search
-* Product details page
-* Add to cart functionality
-* Checkout process
-* Guest customer information form
-* Payment method selection
-* Order submission
+The purpose of this testing is to verify that a guest user can search for a product, add it to the cart, and complete checkout using the "Cash on delivery" payment method.
 
 ---
 
-## Test Scenario
+# Positive Test Cases
 
-### Guest Checkout With Cash On Delivery
+## TC-01 – Complete checkout with valid information
+
+Priority: High
+
+Preconditions:
+
+* User is on the homepage
 
 Steps:
 
-1. Open Shopware demo website
-2. Search for a product
-3. Open product page
-4. Add product to cart
-5. Proceed to checkout
-6. Fill guest checkout form
-7. Accept terms and conditions
-8. Select Cash on Delivery payment method
-9. Submit order
-10. Verify successful checkout flow
+1. Search for a product
+2. Open the product page
+3. Add the product to the cart
+4. Proceed to checkout
+5. Fill in all required customer information
+6. Select "Cash on delivery"
+7. Place the order
+
+Expected Result:
+
+* The order is completed successfully
 
 ---
 
-## Expected Result
+## TC-02 – Search for a product
 
-The user should successfully complete checkout and reach the order confirmation or order page.
+Priority: High
+
+Preconditions:
+
+* Homepage is loaded
+
+Steps:
+
+1. Enter a product name in the search bar
+2. Start the search
+
+Expected Result:
+
+* Matching products are displayed
 
 ---
 
-## Test Type
+## TC-03 – Add product to cart
 
-* End-to-End Testing
-* UI Automation Testing
-* Cross-Browser Testing
+Priority: High
+
+Preconditions:
+
+* Product page is opened
+
+Steps:
+
+1. Click the "Add to cart" button
+
+Expected Result:
+
+* Product appears in the shopping cart
 
 ---
 
-## Browsers Tested
+## TC-04 – Open checkout page
 
-* Chromium
-* Firefox
-* WebKit
+Priority: High
+
+Preconditions:
+
+* Product already exists in cart
+
+Steps:
+
+1. Open the cart
+2. Continue to checkout
+
+Expected Result:
+
+* Checkout page opens successfully
+
+---
+
+## TC-05 – Select Cash on delivery payment
+
+Priority: Medium
+
+Preconditions:
+
+* User is on checkout page
+
+Steps:
+
+1. Select "Cash on delivery" payment method
+
+Expected Result:
+
+* Payment method becomes selected
+
+---
+
+# Negative Test Cases
+
+## TC-06 – Submit form with empty required fields
+
+Priority: High
+
+Preconditions:
+
+* Checkout page is open
+
+Steps:
+
+1. Leave required fields empty
+2. Try to place the order
+
+Expected Result:
+
+* Validation errors are displayed
+
+---
+
+## TC-07 – Invalid email format
+
+Priority: High
+
+Preconditions:
+
+* Checkout form is visible
+
+Steps:
+
+1. Enter an invalid email format
+2. Submit the form
+
+Expected Result:
+
+* Email validation message appears
+
+---
+
+## TC-08 – Checkout with empty cart
+
+Priority: Medium
+
+Preconditions:
+
+* Cart contains no products
+
+Steps:
+
+1. Try to access checkout
+
+Expected Result:
+
+* User cannot continue checkout
+
+---
+
+# Edge Cases
+
+## TC-09 – Very long customer name
+
+Priority: Medium
+
+Preconditions:
+
+* Checkout page is open
+
+Steps:
+
+1. Enter extremely long first and last names
+2. Submit the form
+
+Expected Result:
+
+* System handles the input correctly or shows validation
+
+---
+
+## TC-10 – Special characters in address fields
+
+Priority: Medium
+
+Preconditions:
+
+* Checkout form is open
+
+Steps:
+
+1. Enter special characters in address fields
+2. Submit the form
+
+Expected Result:
+
+* Form handles input safely without crashing
+
+---
+
+# Testing Environment
+
+* Website: Shopware 6 Demo Store
+* Testing type: Manual Testing and Automation Testing
+* Automation tool: Playwright
+* Browsers tested:
+
+  * Chromium
+  * Firefox
+  * WebKit
+* Operating system: Windows
+
+---
+
+# Notes
+
+During testing, the website occasionally switched between English and German labels. Because of this, regex-based selectors were used in the Playwright automation test to make the test more stable across language changes.

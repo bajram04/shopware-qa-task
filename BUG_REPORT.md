@@ -1,30 +1,30 @@
 # Bug Report
 
-## Bug 1 - Language Inconsistency
+## Bug 1 – Website language changes during checkout
 
 ### Description
 
-The Shopware demo website dynamically changes between different languages (English/German), which may cause automated UI selectors based on visible text to become unstable.
+While testing the checkout flow, some pages switched between English and German labels. This can make the user experience inconsistent and can also affect UI automation tests that rely on visible text.
 
 ---
 
 ### Steps To Reproduce
 
-1. Open the Shopware demo site
-2. Navigate through product and checkout pages
-3. Observe changing button and label languages
+1. Open the Shopware demo website
+2. Navigate through products and checkout pages
+3. Observe that some buttons and labels appear in different languages
 
 ---
 
 ### Expected Result
 
-The website language should remain consistent during the user session.
+The website language should remain consistent during the session.
 
 ---
 
 ### Actual Result
 
-Some pages display different languages, causing inconsistent UI text.
+Some parts of the website appear in German while others appear in English.
 
 ---
 
@@ -34,26 +34,66 @@ Medium
 
 ---
 
-## Bug 2 - Dynamic Selector Instability
+## Bug 2 – Multiple elements matching the same text
 
 ### Description
 
-Some checkout elements use dynamic text or multiple matching elements, which may create automation instability with strict selectors.
+Some UI elements share similar visible text, which may cause selector conflicts during automation testing.
+
+Example:
+
+* "Cash on delivery" matched more than one element on the page.
+
+---
+
+### Steps To Reproduce
+
+1. Open checkout page
+2. Try locating payment option using text-only selectors
 
 ---
 
 ### Expected Result
 
-UI elements should have stable identifiers or unique selectors.
+Elements should have more unique identifiers or clearer accessibility labels.
 
 ---
 
 ### Actual Result
 
-Some selectors require regex or semantic role handling to avoid strict mode conflicts.
+Multiple elements can match the same selector text.
 
 ---
 
 ### Severity
 
 Low
+
+---
+
+## Bug 3 – Dynamic checkout elements
+
+### Description
+
+Some checkout elements appear conditionally depending on the current checkout state, such as buttons or form sections.
+
+This may create instability during automated testing if selectors are not handled carefully.
+
+---
+
+### Expected Result
+
+Checkout elements should behave consistently during the flow.
+
+---
+
+### Actual Result
+
+Certain buttons or sections appear only in specific situations.
+
+---
+
+### Severity
+
+Low
+
